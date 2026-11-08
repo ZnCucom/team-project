@@ -167,7 +167,7 @@ The first version of Lo-Fi Companion is planned to include:
 - a local WAV playlist with basic playback controls,
 - current weather retrieval,
 - several weather-based room scenes,
-- and local JSON persistence.
+- and local data persistence.
 
 The project will prioritize a small but complete and reliable application over a large number of features.
 
