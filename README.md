@@ -10,12 +10,12 @@ The application combines several connected features:
 
 - focus and task management,
 - a virtual pet,
-- Spotify-based background music,
+- local WAV background music,
 - and weather-based scenery.
 
 The goal of the project is to create a small virtual study space where users can plan what they need to do, focus on their work, listen to music, and receive simple companionship from a virtual pet.
 
-Our initial version will support one user, one pet, a lightweight task list, a focus timer, a small set of dialogue messages, Spotify integration where available, weather-based scenery, and a single main application window.
+Our initial version will support one user, one pet, a lightweight task list, a focus timer, a small set of dialogue messages, a local WAV music player, weather-based scenery, and a single main application window.
 
 ---
 
@@ -55,22 +55,22 @@ The pet may also react when the user completes a focus session or finishes a tas
 
 ---
 
-### 3. Spotify Music Integration
+### 3. Local WAV Music Player
 **Owner: [Member C]**
 
-As a user, I want to connect Spotify and control my study music from the application so that I can create a comfortable study atmosphere without leaving my workspace.
+As a student, I want to play built-in relaxing music and add my own local WAV files to a playlist so that I can personalize my study environment without leaving the application.
 
-The planned Spotify integration may allow users to:
+The initial version will allow users to:
 
-- connect a Spotify account,
-- view the currently playing track,
-- access selected music or playlists,
-- control supported playback actions such as play, pause, skip, and volume,
-- and restore relevant music preferences when the application is reopened.
+- choose from a small set of built-in relaxing WAV tracks,
+- add compatible local `.wav` files to a playlist,
+- play, pause, resume, and move between tracks,
+- restore imported track paths when the application is reopened,
+- and receive a clear error message when a file is missing or unsupported.
 
-The exact Spotify functionality will depend on the capabilities, authentication requirements, and access restrictions of the Spotify Web API.
+The playback implementation will use Java standard sound APIs behind an interface so that the application logic remains testable and independent of the audio library.
 
-If Spotify is unavailable or cannot be connected, the rest of the application should remain usable. A simple fallback music option may be added if necessary.
+Imported tracks will remain in their original locations on the user's computer. Moving or deleting an imported file may make it unavailable to the application.
 
 ---
 
@@ -98,7 +98,7 @@ Each team member will be primarily responsible for one complete area of the appl
 | --- | --- | --- |
 | [Member A] | Focus & Task Management | Focus timer, completed-session tracking, to-do list, related UI, and tests |
 | [Member B] | Pet Interaction | Pet state, friendship progression, dialogue system, pet UI, and tests |
-| [Member C] | Spotify Music Integration | Spotify authentication/integration, playback controls, music state/preferences, related UI, and tests |
+| [Member C] | Local WAV Music Player | Built-in and imported WAV tracks, playlist and playback controls, local track persistence, related UI, and tests |
 | [Member D] | Weather-Based Scenery | Weather API integration, weather-to-scene mapping, weather UI, error handling, and tests |
 
 Shared application components, integration work, and overall design decisions will be discussed and reviewed by the entire team.
@@ -114,7 +114,7 @@ For example:
 - completing a focus session may increase pet friendship and trigger an encouraging dialogue,
 - completing a task may trigger a short pet response,
 - the weather system may change the room background,
-- and Spotify music can continue playing while the user works with the timer or task list.
+- and local music can continue playing while the user works with the timer or task list.
 
 The first version will keep these interactions simple so that each use case remains manageable.
 
@@ -122,7 +122,7 @@ The first version will keep these interactions simple so that each use case rema
 
 ## Data Persistence
 
-The application will store relevant user data locally using JSON.
+Each feature will store relevant user data in an appropriate local file format.
 
 The saved data may include:
 
@@ -130,8 +130,7 @@ The saved data may include:
 - friendship progress,
 - completed focus sessions,
 - to-do list data,
-- music preferences or Spotify-related settings that are appropriate to store,
-- volume preferences,
+- imported WAV file paths and the selected track,
 - and the selected city.
 
 This information will be restored when the application is reopened.
@@ -141,16 +140,6 @@ Sensitive authentication credentials or secrets will not be stored directly in t
 ---
 
 ## Planned External APIs
-
-### Spotify Web API
-
-The music feature plans to use the Spotify Web API.
-
-The integration may be used to retrieve Spotify information and control supported playback features after the user authorizes the application.
-
-Spotify-specific code will be separated from the main application logic through interfaces so that API-related changes do not require major changes to the rest of the application.
-
-Because Spotify access depends on authentication, account capabilities, and API restrictions, the exact supported music controls will be confirmed during implementation.
 
 ### Weather API
 
@@ -175,10 +164,10 @@ The first version of Lo-Fi Companion is planned to include:
 - a focus timer,
 - completed focus-session tracking,
 - a lightweight to-do list,
-- Spotify integration with a limited set of supported music controls,
+- a local WAV playlist with basic playback controls,
 - current weather retrieval,
 - several weather-based room scenes,
-- and local JSON persistence.
+- and local data persistence.
 
 The project will prioritize a small but complete and reliable application over a large number of features.
 
@@ -194,7 +183,7 @@ The following features are not currently planned for the first version:
 - multiple pets,
 - complex story branching,
 - advanced task-management features,
-- advanced Spotify library management,
+- online music streaming and advanced playlist management,
 - advanced desktop-overlay behaviour,
 - and AI-generated dialogue.
 
