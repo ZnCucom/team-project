@@ -10,6 +10,8 @@ import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import audio.MusicTrack;
+
 public class MusicDemo {
   public static void main(String[] args) throws Exception {
     // 从运行时的资源根目录查找随程序打包的 WAV。
@@ -28,8 +30,10 @@ public class MusicDemo {
     SwingUtilities.invokeLater(() -> {
       JFrame frame = new JFrame("Music Demo");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      frame.add(new MusicPanel(new WavPlayer(clip)));
-      frame.setSize(320, 140);
+      // 曲目名称用于显示，audio 指向内置 WAV，true 表示它来自应用资源。
+      MusicTrack builtInTrack = new MusicTrack("demo.wav", audio, true);
+      frame.add(new MusicPanel(new WavPlayer(clip), builtInTrack));
+      frame.setSize(440, 320);
       frame.setLocationRelativeTo(null);
       frame.setVisible(true);
     });
